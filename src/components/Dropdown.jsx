@@ -29,8 +29,8 @@ const DropDown = ({ anyText, item, items, setItem, category }) => {
           <RiMapPinLine className="dropdown-icon-primary" />
         )}
         <div>
-          <p className="text-[15px] font-medium leading-tight">{item}</p>
-          <p className="text-[13px]">
+          <p className="text-[1rem] font-medium leading-tight">{item}</p>
+          <p className="text-[0.8rem]">
             {!item.split(" ").includes("(any)") ? "" : anyText}
           </p>
         </div>
