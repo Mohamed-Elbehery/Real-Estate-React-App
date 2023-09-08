@@ -6,15 +6,28 @@ import { auth, googleProvider } from "../firebase/firebase";
 
 // import Logo
 import Logo from "../assets/img/logo.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    JSON.parse(localStorage.getItem("loggedIn"))
+      ? setIsLoggedIn(true)
+      : setIsLoggedIn(false);
+  }, []);
 
   const handleLogin = async () => {
     try {
       await signInWithPopup(auth, googleProvider);
       setIsLoggedIn(true);
+      localStorage.setItem(
+        "loggedIn",
+        JSON.stringify({
+          isLogged: true,
+          username: auth?.currentUser?.displayName,
+        })
+      );
     } catch (err) {
       console.error(err);
     }
@@ -24,6 +37,7 @@ const Header = () => {
     try {
       await signOut(auth);
       setIsLoggedIn(false);
+      localStorage.setItem("loggedIn", false);
     } catch (err) {
       console.error(err);
     }
@@ -58,7 +72,7 @@ const Header = () => {
             <p>
               Hi,{" "}
               <span className="text-violet-700">
-                {auth?.currentUser?.displayName}
+                {JSON.parse(localStorage.loggedIn).username}
               </span>
             </p>
             <Link

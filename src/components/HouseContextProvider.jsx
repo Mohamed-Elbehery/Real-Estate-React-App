@@ -11,11 +11,15 @@ export const HouseContext = createContext();
 
 const HouseContextProvider = ({ children }) => {
   const [houses, setHouses] = useState(housesData);
+
   const [country, setCountry] = useState("Location (any)");
   const [countries, setCountries] = useState([]);
-  const [property, setProperty] = useState("Property type (any)");
+
+  const [property, setProperty] = useState("Property (any)");
   const [properties, setProperties] = useState([]);
+
   const [price, setPrice] = useState("Price range (any)");
+
   const [isLoading, setIsLoading] = useState(false);
 
   // countries
@@ -33,7 +37,7 @@ const HouseContextProvider = ({ children }) => {
     const allProperties = houses.map((house) => house.type);
 
     // remove duplicates of properties
-    setProperties(["Property type (any)", ...new Set(allProperties)]);
+    setProperties(["Property (any)", ...new Set(allProperties)]);
   }, [houses]);
 
   const handleClick = () => {
@@ -82,7 +86,7 @@ const HouseContextProvider = ({ children }) => {
       if (!isDefault(country) && !isDefault(property) && isDefault(price))
         return house.country === country && house.type === property;
 
-      // if country & property is not default
+      // if country & price is not default
       if (!isDefault(country) && isDefault(property) && !isDefault(price)) {
         if (housePrice >= minPrice && housePrice <= maxPrice) {
           return house.country === country;

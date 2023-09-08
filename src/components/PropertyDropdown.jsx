@@ -7,7 +7,7 @@ import DropDown from "./Dropdown";
 const PropertyDropdown = () => {
   const { property, setProperty } = useContext(HouseContext);
 
-  const properties = ["Property (any)", "House", "Apartment"];
+  const properties = ["Property (any)", "House", "Apartament"];
 
   return (
     <DropDown
